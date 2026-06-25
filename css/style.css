@@ -1,0 +1,31 @@
+/* css/style.css */
+
+/* Animation layout engine states */
+.card-scale-up {
+    animation: layoutCardFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes layoutCardFade {
+    from {
+        opacity: 0;
+        transform: scale(0.97) translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Modal activation styles */
+.modal-active {
+    opacity: 1 !important;
+    transform: scale(1) !important;
+}
+
+/* Custom slider thumb micro-styling resets */
+input[type="range"]::-webkit-slider-thumb {
+    box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
