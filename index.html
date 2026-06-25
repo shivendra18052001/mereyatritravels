@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MereYatriTravels - Smart Travel Assistant</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        input[type=range] { -webkit-appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 18px; width: 18px; border-radius: 50%;
+            background: #f97316; cursor: pointer; margin-top: -6px;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 6px; cursor: pointer; background: #e2e8f0; border-radius: 999px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased selection:bg-orange-500 selection:text-white pb-20">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 bg-[#F8FAFC]/90 backdrop-blur-md border-b border-slate-200 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer">
+                <span class="text-xl font-extrabold text-slate-900 tracking-tight">
+                    🧭 MereYatri<span class="text-orange-500">Travels</span>
+                </span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-[14px] font-bold text-slate-500">
+                <a href="#trip-planner" class="hover:text-slate-900 transition">Trip Planner</a>
+                <a href="#explore" class="hover:text-slate-900 transition">Explore</a>
+                <a href="#travel-tools" class="hover:text-slate-900 transition">Travel Tools</a>
+                <a href="#reviews" class="hover:text-slate-900 transition">Reviews</a>
+                <a href="#faq" class="hover:text-slate-900 transition">FAQ</a>
+                <a href="#contact" class="hover:text-slate-900 transition">Contact</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <button onclick="window.location.href='#contact'" class="bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2 rounded-full transition shadow-md">
+                    Get a Quote
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Smart Trip Planner -->
+    <section id="trip-planner" class="max-w-7xl mx-auto px-4 md:px-6 py-12">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">🔮 Smart Trip Planner</h2>
+            <p class="text-slate-500 mt-2 font-medium text-sm">Bole to, tumhaari pasand ka poora hisaab-kitaab yahin. Filter ghumao aur perfect trip dhoondo!</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+            <!-- Sidebar -->
+            <aside class="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm space-y-6">
+                <div>
+                    <div class="flex justify-between text-sm font-bold text-slate-700 mb-2">
+                        <span>Budget per person</span>
+                        <span class="text-orange-500 font-extrabold" id="budgetValue">₹50,000</span>
+                    </div>
+                    <input type="range" id="budgetSlider" min="5000" max="100000" step="1000" value="50000" class="w-full">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-3">Interests</label>
+                    <div class="space-y-2.5 text-sm font-medium text-slate-600" id="interestsContainer">
+                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Beach" class="rounded accent-orange-500 w-4 h-4"> 🏖️ Beach</label>
+                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Adventure" class="rounded accent-orange-500 w-4 h-4"> 🧗 Adventure</label>
+                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Culture" class="rounded accent-orange-500 w-4 h-4"> 🕌 Culture</label>
+                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Nature" class="rounded accent-orange-500 w-4 h-4"> 🌿 Nature</label>
+                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="City" class="rounded accent-orange-500 w-4 h-4"> 🏙️ City</label>
+                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Food" class="rounded accent-orange-500 w-4 h-4"> 🍲 Food</label>
+                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Romantic" class="rounded accent-orange-500 w-4 h-4"> 💕 Romantic</label>
+                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Luxury" class="rounded accent-orange-500 w-4 h-4"> ✨ Luxury</label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2">Climate</label>
+                    <select id="climateFilter" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm text-slate-700 font-semibold outline-none focus:ring-2 focus:ring-orange-500/20">
+                        <option value="Any">Any climate</option>
+                        <option value="Cold">Snowy / Cold</option>
+                        <option value="Tropical">Warm / Beachy</option>
+                        <option value="Moderate">Pleasant / Moderate</option>
+                    </select>
+                </div>
+            </aside>
+
+            <!-- Cards Grid -->
+            <div class="lg:col-span-3">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-sm font-bold text-slate-800 bg-slate-100 px-3 py-1 rounded-full" id="tripCounter">18 trips found</span>
+                    <span class="text-xs font-bold text-slate-400">5 days • 2 travelers</span>
+                </div>
+                <div id="plannerGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    <!-- Javascript populates this -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore By Vibe -->
+    <section id="explore" class="bg-[#F8FAFC] py-12">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-8">
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">🌍 Explore by Vibe</h2>
+                <p class="text-slate-500 mt-2 font-medium text-sm">Apni pasand chuno — hand-picked Indian destinations grouped by vibe.</p>
+            </div>
+            
+            <div class="flex justify-center items-center gap-2 overflow-x-auto pb-4 no-scrollbar" id="vibeTrackBar">
+                <button onclick="filterVibeCategory('All')" class="bg-orange-500 text-white px-5 py-2 rounded-full text-sm font-bold transition">All</button>
+                <button onclick="filterVibeCategory('Beach')" class="bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full text-sm font-bold transition">Beaches</button>
+                <button onclick="filterVibeCategory('Adventure')" class="bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full text-sm font-bold transition">Adventure</button>
+                <button onclick="filterVibeCategory('Culture')" class="bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full text-sm font-bold transition">Culture</button>
+                <button onclick="filterVibeCategory('Nature')" class="bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full text-sm font-bold transition">Nature</button>
+                <button onclick="filterVibeCategory('City')" class="bg-white text-slate-600 border border-slate-200 px-5 py-2 rounded-full text-sm font-bold transition">City</button>
+            </div>
+
+            <div id="vibeCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+                <!-- Vibe Cards inject here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Travel Tools (All 4 Tools exactly as image) -->
+    <section id="travel-tools" class="max-w-7xl mx-auto px-4 md:px-6 py-12">
+        <div class="text-center max-w-2xl mx-auto mb-10">
+            <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">🛠️ Travel Tools</h2>
+            <p class="text-slate-500 mt-2 font-medium text-sm">Calculator-walculator sab andar hi hai — bahar jaane ki zaroorat nahi, guru.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <!-- Tool 1: Budget Estimator -->
+            <div class="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2 mb-2">💰 Budget Estimator</h3>
+                <p class="text-[11px] text-slate-400 font-medium mb-4">Jeb par kitna bhaari padega? Turant pata karo.</p>
+                <div class="space-y-3 text-sm">
+                    <div><label class="block font-bold text-slate-600 mb-1 text-xs">Daily budget / person (₹)</label><input type="number" id="estDaily" value="2000" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-bold text-slate-800 outline-none"></div>
+                    <div><label class="block font-bold text-slate-600 mb-1 text-xs">Days</label><input type="number" id="estDays" value="5" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-bold text-slate-800 outline-none"></div>
+                    <div><label class="block font-bold text-slate-600 mb-1 text-xs">Travelers</label><input type="number" id="estTravelers" value="2" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-bold text-slate-800 outline-none"></div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase">Total Trip Cost:</span>
+                    <span class="text-lg font-black text-emerald-600" id="estResult">₹20,000</span>
+                </div>
+            </div>
+
+            <!-- Tool 2: Trip Cost Splitter -->
+            <div class="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🧮 Trip Cost Splitter</h3>
+                <p class="text-[11px] text-slate-400 font-medium mb-4">Split the total trip bill fairly among your group.</p>
+                <div class="space-y-3 text-sm">
+                    <div><label class="block font-bold text-slate-600 mb-1 text-xs">Total trip cost (₹)</label><input type="number" id="splitTotal" value="50000" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-bold text-slate-800 outline-none"></div>
+                    <div><label class="block font-bold text-slate-600 mb-1 text-xs">Number of travelers</label><input type="number" id="splitCount" value="4" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-bold text-slate-800 outline-none"></div>
+                    <div><label class="block font-bold text-slate-600 mb-1 text-xs">Extra / tip (₹)</label><input type="number" id="splitTip" value="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 font-bold text-slate-800 outline-none"></div>
+                </div>
+                <div class="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase">Per Person:</span>
+                    <span class="text-lg font-black text-orange-500" id="splitResult">₹12,500</span>
+                </div>
+            </div>
+
+            <!-- Tool 3: Packing List -->
+            <div class="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-slate-900 flex items-center gap-2 mb-2">🎒 Packing List Generator</h3>
+                    <p class="text-[11px] text-slate-400 font-medium mb-4">Bori bistar baandho — kuchh na bhoolo!</p>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Destination</label>
+                            <select class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-slate-700 outline-none">
+                                <option>Goa, Goa</option><option>Manali, HP</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1">Days</label>
+                            <input type="number" value="5" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-slate-700 outline-none">
+                        </div>
+                    </div>
+                </div>
+                <button class="w-full bg-orange-500 text-white font-bold py-2.5 rounded-xl text-sm mt-4 hover:bg-orange-600">
+                    Generate list
+                </button>
+            </div>
+
+            <!-- Tool 4: Countdown -->
+            <div class="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm">
+                <h3 class="font-bold text-slate-900 flex items-center gap-2 mb-2">⏳ Trip Countdown</h3>
+                <p class="text-[11px] text-slate-400 font-medium mb-4">Excitement chalu — nikalne me kitne din bache?</p>
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1">Departure date</label>
+                    <input type="date" id="countdownDateInput" value="2026-07-25" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm font-bold text-slate-700 outline-none">
+                </div>
+                <div class="flex justify-between text-center mt-6 px-2">
+                    <div><p class="text-2xl font-black text-orange-500" id="cdDays">29</p><p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Days</p></div>
+                    <div><p class="text-2xl font-black text-orange-500" id="cdHrs">12</p><p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Hrs</p></div>
+                    <div><p class="text-2xl font-black text-orange-500" id="cdMin">07</p><p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Min</p></div>
+                    <div><p class="text-2xl font-black text-orange-500" id="cdSec">12</p><p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Sec</p></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews" class="py-12">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">⭐️ Loved by Travelers</h2>
+                <p class="text-slate-500 mt-2 font-medium text-sm">Log kya bole, khud padh lo — apan jhooth nahi bolte, guru!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm"><p class="text-orange-400 text-xs mb-3">★★★★★</p><p class="text-sm font-medium text-slate-600 leading-relaxed mb-6">"The day-by-day plan was spot on. We barely had to think — just showed up and enjoyed. Best trip ever!"</p><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-[#008080] flex items-center justify-center text-white text-[10px] font-bold">AS</div><div><p class="text-xs font-bold text-slate-800">Aarav Sharma</p><p class="text-[10px] text-slate-400 font-semibold">Goa, 5 days</p></div></div></div>
+                <div class="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm"><p class="text-orange-400 text-xs mb-3">★★★★★</p><p class="text-sm font-medium text-slate-600 leading-relaxed mb-6">"Loved the budget estimator and packing list. The premium camp upgrade was worth every rupee!"</p><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold">LI</div><div><p class="text-xs font-bold text-slate-800">Lena Iyer</p><p class="text-[10px] text-slate-400 font-semibold">Leh-Ladakh, 7 days</p></div></div></div>
+                <div class="bg-white p-6 rounded-[24px] border border-slate-100 shadow-sm"><p class="text-orange-400 text-xs mb-3">★★★★★</p><p class="text-sm font-medium text-slate-600 leading-relaxed mb-6">"The private houseboat was magical. MereYatriTravels understood exactly what we wanted."</p><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-[#008080] flex items-center justify-center text-white text-[10px] font-bold">PN</div><div><p class="text-xs font-bold text-slate-800">Priya Nair</p><p class="text-[10px] text-slate-400 font-semibold">Kerala, 5 days</p></div></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="max-w-3xl mx-auto px-4 py-12">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">❓ Sawaal-Jawaab (FAQ)</h2>
+            <p class="text-slate-500 mt-2 font-medium text-sm">Mann me kuchh chal raha hai? Yahan dekho — shayad jawaab mil jaye!</p>
+        </div>
+        <div class="space-y-3" id="faqAccordionContainer"></div>
+    </section>
+
+    <!-- Contact Horizontal Card -->
+    <section id="contact" class="max-w-5xl mx-auto px-4 py-12">
+        <div class="bg-[#F8FAFC] p-8 rounded-[24px] border border-slate-200 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+                <h3 class="text-2xl font-extrabold tracking-tight text-slate-900 mb-2">📠 Plan with a human</h3>
+                <p class="text-slate-500 text-sm font-medium leading-relaxed mb-6">Insaan se baat karni hai? Apni pasand bhejo, MereYatriTravels ka expert 24 ghante me poori custom itinerary bana dega.</p>
+                <div class="space-y-3 text-sm font-bold text-slate-700">
+                    <p class="flex items-center gap-2"><span class="text-green-500">✅</span> Bilkul free quote — koi tension nahi</p>
+                    <p class="flex items-center gap-2"><span class="text-green-500">✅</span> Flexible cancellation — mann badle to koi baat nahi</p>
+                    <p class="flex items-center gap-2"><span class="text-green-500">✅</span> 24/7 trip support — hum hamesha hai</p>
+                </div>
+            </div>
+            
+            <form id="contactInquiryForm" class="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold text-slate-600 mb-1">Name</label><input type="text" placeholder="Your name" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm outline-none focus:border-orange-500"></div>
+                    <div><label class="block text-xs font-bold text-slate-600 mb-1">Email</label><input type="email" placeholder="you@email.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm outline-none focus:border-orange-500"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="block text-xs font-bold text-slate-600 mb-1">Destination</label><input type="text" placeholder="Where to?" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm outline-none focus:border-orange-500"></div>
+                    <div><label class="block text-xs font-bold text-slate-600 mb-1">Travel date</label><input type="date" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm outline-none focus:border-orange-500 text-slate-500"></div>
+                </div>
+                <div><label class="block text-xs font-bold text-slate-600 mb-1">Message</label><textarea rows="2" placeholder="Apne sapno ki trip ke baare me batao..." class="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-sm outline-none focus:border-orange-500"></textarea></div>
+                <button type="submit" class="w-full bg-orange-500 text-white font-bold py-3 rounded-xl mt-2 text-sm hover:bg-orange-600 transition">Bhej do inquiry</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="fixed bottom-6 left-6 z-40 bg-[#128C7E] text-white rounded-full px-5 py-3 shadow-lg flex items-center gap-2 font-bold text-sm cursor-pointer hover:bg-[#075E54] transition">
+        <div class="w-2.5 h-2.5 rounded-full bg-green-300 animate-pulse"></div> Baat karo!
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
