@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>MereYatriTravels - Smart Travel Assistant</title>
     <script src="https://cdn.tailwindcss.com"></script>
     
@@ -15,7 +15,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
@@ -28,36 +28,40 @@
             width: 100%; height: 6px; cursor: pointer; background: #e2e8f0; border-radius: 999px;
         }
         .dark input[type=range]::-webkit-slider-runnable-track {
-            background: #334155; /* Dark mode track */
+            background: #334155; 
         }
     </style>
 </head>
-<body class="bg-[#F8FAFC] dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased selection:bg-orange-500 selection:text-white transition-colors duration-300 relative">
+<body class="bg-[#F8FAFC] dark:bg-slate-900 text-slate-800 dark:text-slate-100 antialiased selection:bg-orange-500 selection:text-white transition-colors duration-300 relative w-full overflow-x-hidden">
 
     <!-- Navbar -->
-    <nav class="sticky top-0 bg-[#F8FAFC]/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 z-50 px-6 py-4 transition-colors duration-300">
+    <nav class="sticky top-0 w-full bg-[#F8FAFC]/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 z-50 px-4 md:px-6 py-3 md:py-4 transition-colors duration-300">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-2 cursor-pointer">
-                <span class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            
+            <!-- Logo -->
+            <div class="flex items-center gap-2 cursor-pointer z-50">
+                <span class="text-lg md:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                     🧭 MereYatri<span class="text-orange-500">Travels</span>
                 </span>
             </div>
-            <div class="hidden md:flex items-center gap-8 text-[14px] font-bold text-slate-500 dark:text-slate-400">
+            
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center gap-8 text-[14px] font-bold text-slate-500 dark:text-slate-400">
                 <a href="#trip-planner" class="hover:text-slate-900 dark:hover:text-white transition">Trip Planner</a>
                 <a href="#explore" class="hover:text-slate-900 dark:hover:text-white transition">Explore</a>
                 <a href="#travel-tools" class="hover:text-slate-900 dark:hover:text-white transition">Travel Tools</a>
                 <a href="#reviews" class="hover:text-slate-900 dark:hover:text-white transition">Reviews</a>
                 <a href="#faq" class="hover:text-slate-900 dark:hover:text-white transition">FAQ</a>
-                <a href="#contact" class="hover:text-slate-900 dark:hover:text-white transition">Contact</a>
             </div>
             
-            <div class="flex items-center gap-4">
-                <button onclick="window.location.href='#contact'" class="bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2 rounded-full transition shadow-md">
+            <!-- Desktop Right Actions & Mobile Toggle -->
+            <div class="flex items-center gap-2 md:gap-4 z-50">
+                <button onclick="window.location.href='#contact'" class="hidden md:block bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2 rounded-full transition shadow-md">
                     Get a Quote
                 </button>
                 
                 <!-- Favorites and Theme Toggle Icons -->
-                <div class="flex items-center gap-3 pl-3 border-l border-slate-300 dark:border-slate-700">
+                <div class="flex items-center gap-2 md:gap-3 pl-1 md:pl-3 md:border-l border-slate-300 dark:border-slate-700">
                     <button class="relative text-slate-400 hover:text-red-500 dark:hover:text-red-400 transition text-lg">
                         <span class="absolute -top-1 -right-1 w-2.5 h-2.5 bg-red-500 border border-white dark:border-slate-900 rounded-full"></span>
                         ❤️
@@ -65,90 +69,107 @@
                     <button id="themeToggle" class="text-slate-500 dark:text-slate-400 hover:text-orange-500 dark:hover:text-orange-400 transition text-xl px-1">
                         🌙
                     </button>
+                    
+                    <!-- Mobile Hamburger Menu Button -->
+                    <button id="mobileMenuBtn" class="lg:hidden text-slate-600 dark:text-slate-300 text-2xl ml-2 focus:outline-none">
+                        ☰
+                    </button>
                 </div>
             </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="hidden lg:hidden absolute top-full left-0 w-full bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-xl flex flex-col py-4 px-6 space-y-4 text-sm font-bold text-slate-600 dark:text-slate-300">
+            <a href="#trip-planner" class="mobile-link hover:text-orange-500">Trip Planner</a>
+            <a href="#explore" class="mobile-link hover:text-orange-500">Explore</a>
+            <a href="#travel-tools" class="mobile-link hover:text-orange-500">Travel Tools</a>
+            <a href="#reviews" class="mobile-link hover:text-orange-500">Reviews</a>
+            <a href="#faq" class="mobile-link hover:text-orange-500">FAQ</a>
+            <a href="#contact" class="mobile-link hover:text-orange-500">Contact Us</a>
+            <button onclick="window.location.href='#contact'" class="bg-orange-500 text-white text-center py-3 rounded-xl shadow-md mt-2">Get a Free Quote</button>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="max-w-7xl mx-auto px-4 md:px-6 pt-16 pb-12">
+    <header class="max-w-7xl mx-auto px-4 md:px-6 pt-10 md:pt-16 pb-12 w-full overflow-hidden">
         <div class="max-w-4xl">
-            <div class="bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 px-4 py-1.5 rounded-full inline-block text-xs font-bold mb-6 border border-orange-100 dark:border-orange-500/20 shadow-sm">
+            <div class="bg-orange-50 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 px-4 py-1.5 rounded-full inline-block text-[10px] md:text-xs font-bold mb-6 border border-orange-100 dark:border-orange-500/20 shadow-sm leading-tight">
                 ✨ Kanpur waale bharose ke saath — ekdam jhakaas trips!
             </div>
-            <h1 class="text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-6 transition-colors">
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-4 md:mb-6 transition-colors">
                 Tell us <span class="text-orange-500">where & when</span>.<br>
                 Baaki sab <span class="text-orange-500">apan</span> dekh lenge.
             </h1>
-            <p class="text-slate-500 dark:text-slate-400 text-lg md:text-xl font-medium max-w-3xl mb-10 leading-relaxed transition-colors">
+            <p class="text-slate-500 dark:text-slate-400 text-base md:text-xl font-medium max-w-3xl mb-8 md:mb-10 leading-relaxed transition-colors">
                 Bhaiya, batao kahan ghoomna hai aur kab — MereYatriTravels turant curated trips, budget aur ready-to-go day plan nikaal dega. India ghoomo, dil khush karo! 😎
             </p>
         </div>
 
-        <!-- Inline Horizontal Search Bar -->
-        <div class="bg-white dark:bg-slate-800 p-2 rounded-[2rem] border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col md:flex-row items-center gap-2 w-full max-w-5xl mb-8 transition-colors">
-            <!-- Destination -->
-            <div class="bg-slate-50 dark:bg-slate-900/50 rounded-[1.5rem] p-3 px-5 flex-grow w-full md:w-auto border border-transparent focus-within:border-orange-200 dark:focus-within:border-orange-500/50 transition">
+        <!-- Inline Horizontal Search Bar (Mobile Optimized) -->
+        <div class="bg-white dark:bg-slate-800 p-2 md:p-2 rounded-3xl md:rounded-[2rem] border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col md:flex-row items-stretch md:items-center gap-2 w-full max-w-5xl mb-8 transition-colors">
+            <div class="bg-slate-50 dark:bg-slate-900/50 rounded-2xl md:rounded-[1.5rem] p-3 px-4 md:px-5 flex-grow border border-transparent focus-within:border-orange-200 dark:focus-within:border-orange-500/50 transition">
                 <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">📍 Destination / vibe</label>
-                <input type="text" placeholder="e.g. Goa, pahaad, samundar..." class="w-full bg-transparent outline-none font-bold text-slate-800 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500">
+                <input type="text" placeholder="e.g. Goa, pahaad..." class="w-full bg-transparent outline-none font-bold text-slate-800 dark:text-white text-sm placeholder-slate-400 dark:placeholder-slate-500">
             </div>
-            <!-- Date -->
-            <div class="bg-slate-50 dark:bg-slate-900/50 rounded-[1.5rem] p-3 px-5 w-full md:w-48 border border-transparent focus-within:border-orange-200 dark:focus-within:border-orange-500/50 transition">
+            <div class="bg-slate-50 dark:bg-slate-900/50 rounded-2xl md:rounded-[1.5rem] p-3 px-4 md:px-5 w-full md:w-48 border border-transparent focus-within:border-orange-200 dark:focus-within:border-orange-500/50 transition">
                 <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">🗓️ Start date</label>
                 <input type="date" class="w-full bg-transparent outline-none font-bold text-slate-800 dark:text-white text-sm cursor-pointer">
             </div>
-            <!-- Days -->
-            <div class="bg-slate-50 dark:bg-slate-900/50 rounded-[1.5rem] p-3 px-5 w-full md:w-28 border border-transparent focus-within:border-orange-200 dark:focus-within:border-orange-500/50 transition">
-                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">⏱️ Days</label>
-                <input type="number" value="5" class="w-full bg-transparent outline-none font-bold text-slate-800 dark:text-white text-sm">
+            
+            <!-- Grouped Days & Travelers on mobile -->
+            <div class="flex gap-2 w-full md:w-auto">
+                <div class="bg-slate-50 dark:bg-slate-900/50 rounded-2xl md:rounded-[1.5rem] p-3 px-4 md:px-5 w-1/2 md:w-28 border border-transparent focus-within:border-orange-200 dark:focus-within:border-orange-500/50 transition">
+                    <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">⏱️ Days</label>
+                    <input type="number" value="5" class="w-full bg-transparent outline-none font-bold text-slate-800 dark:text-white text-sm">
+                </div>
+                <div class="bg-slate-50 dark:bg-slate-900/50 rounded-2xl md:rounded-[1.5rem] p-3 px-4 md:px-5 w-1/2 md:w-32 border border-transparent focus-within:border-orange-200 dark:focus-within:border-orange-500/50 transition">
+                    <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">👥 Travelers</label>
+                    <input type="number" value="2" class="w-full bg-transparent outline-none font-bold text-slate-800 dark:text-white text-sm">
+                </div>
             </div>
-            <!-- Travelers -->
-            <div class="bg-slate-50 dark:bg-slate-900/50 rounded-[1.5rem] p-3 px-5 w-full md:w-32 border border-transparent focus-within:border-orange-200 dark:focus-within:border-orange-500/50 transition">
-                <label class="block text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">👥 Travelers</label>
-                <input type="number" value="2" class="w-full bg-transparent outline-none font-bold text-slate-800 dark:text-white text-sm">
-            </div>
-            <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-8 py-5 rounded-[1.5rem] transition shadow-md w-full md:w-auto whitespace-nowrap h-full active:scale-95">
+            
+            <button class="bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-6 py-4 md:py-5 rounded-2xl md:rounded-[1.5rem] transition shadow-md w-full md:w-auto whitespace-nowrap h-full active:scale-95 mt-2 md:mt-0">
                 Chalo dhoondein →
             </button>
         </div>
 
-        <!-- Popular Vibes -->
-        <div class="flex flex-wrap items-center gap-3 mb-12">
-            <span class="text-sm font-bold text-slate-500 dark:text-slate-400 mr-2">Popular vibes:</span>
-            <button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm">🏖️ Beach</button>
-            <button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm">🧗 Adventure</button>
-            <button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm">🏛️ Culture</button>
-            <button class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-1.5 rounded-full text-xs font-bold hover:bg-slate-50 dark:hover:bg-slate-700 transition shadow-sm">🌲 Nature</button>
-            <button class="bg-cyan-500 hover:bg-cyan-600 text-white border border-cyan-600 px-4 py-1.5 rounded-full text-xs font-bold transition shadow-sm active:scale-95">🎲 Surprise Me!</button>
+        <!-- Popular Vibes (Mobile scrolling) -->
+        <div class="flex items-center gap-3 mb-10 overflow-x-auto no-scrollbar pb-2 w-full">
+            <span class="text-sm font-bold text-slate-500 dark:text-slate-400 shrink-0">Popular vibes:</span>
+            <button class="shrink-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">🏖️ Beach</button>
+            <button class="shrink-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">🧗 Adventure</button>
+            <button class="shrink-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">🏛️ Culture</button>
+            <button class="shrink-0 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">🌲 Nature</button>
+            <button class="shrink-0 bg-cyan-500 text-white px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">🎲 Surprise Me!</button>
         </div>
 
-        <!-- Data Stats -->
-        <div class="flex flex-wrap items-center gap-12 md:gap-20">
-            <div>
-                <p class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">120</p>
-                <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1">Destinations</p>
+        <!-- Data Stats (Mobile stacked nicely) -->
+        <div class="flex flex-wrap items-center gap-6 md:gap-20">
+            <div class="w-[40%] md:w-auto">
+                <p class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">120</p>
+                <p class="text-[11px] md:text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1">Destinations</p>
             </div>
-            <div>
-                <p class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">48,000</p>
-                <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1">Khush yaatri</p>
+            <div class="w-[40%] md:w-auto">
+                <p class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">48k+</p>
+                <p class="text-[11px] md:text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1">Khush yaatri</p>
             </div>
-            <div>
-                <p class="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">4.9</p>
-                <p class="text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1">Avg rating</p>
+            <div class="w-[40%] md:w-auto">
+                <p class="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">4.9</p>
+                <p class="text-[11px] md:text-sm font-semibold text-slate-500 dark:text-slate-400 mt-1">Avg rating</p>
             </div>
         </div>
     </header>
 
     <!-- Smart Trip Planner Section -->
     <section id="trip-planner" class="max-w-7xl mx-auto px-4 md:px-6 py-12">
-        <div class="text-center max-w-2xl mx-auto mb-10">
-            <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">🧠 Smart Trip Planner</h2>
-            <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-sm">Bole to, tumhaari pasand ka poora hisaab-kitaab yahin. Filter ghumao aur perfect trip dhoondo!</p>
+        <div class="text-center max-w-2xl mx-auto mb-8 md:mb-10">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">🧠 Smart Trip Planner</h2>
+            <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-xs md:text-sm">Bole to, tumhaari pasand ka poora hisaab-kitaab yahin. Filter ghumao aur perfect trip dhoondo!</p>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 md:gap-8 items-start">
             <!-- Sidebar -->
-            <aside class="bg-white dark:bg-slate-800 p-6 rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm space-y-6 transition-colors">
+            <aside class="bg-white dark:bg-slate-800 p-5 md:p-6 rounded-2xl md:rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm space-y-6 transition-colors">
                 <div>
                     <div class="flex justify-between text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">
                         <span>Budget per person</span>
@@ -159,15 +180,13 @@
 
                 <div>
                     <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-3">Interests</label>
-                    <div class="space-y-2.5 text-sm font-medium text-slate-600 dark:text-slate-400" id="interestsContainer">
+                    <div class="grid grid-cols-2 lg:grid-cols-1 gap-2.5 text-sm font-medium text-slate-600 dark:text-slate-400" id="interestsContainer">
                         <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Beach" class="rounded accent-orange-500 w-4 h-4 bg-slate-700 border-slate-600"> 🏖️ Beach</label>
                         <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Adventure" class="rounded accent-orange-500 w-4 h-4 bg-slate-700 border-slate-600"> 🧗 Adventure</label>
                         <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Culture" class="rounded accent-orange-500 w-4 h-4 bg-slate-700 border-slate-600"> 🕌 Culture</label>
                         <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Nature" class="rounded accent-orange-500 w-4 h-4 bg-slate-700 border-slate-600"> 🌿 Nature</label>
                         <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="City" class="rounded accent-orange-500 w-4 h-4 bg-slate-700 border-slate-600"> 🏙️ City</label>
                         <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Food" class="rounded accent-orange-500 w-4 h-4 bg-slate-700 border-slate-600"> 🍲 Food</label>
-                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Romantic" class="rounded accent-orange-500 w-4 h-4 bg-slate-700 border-slate-600"> 💕 Romantic</label>
-                        <label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" value="Luxury" class="rounded accent-orange-500 w-4 h-4 bg-slate-700 border-slate-600"> ✨ Luxury</label>
                     </div>
                 </div>
 
@@ -181,17 +200,6 @@
                     </select>
                 </div>
                 
-                <!-- Sort by Dropdown -->
-                <div class="pt-2 border-t border-slate-100 dark:border-slate-700">
-                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Sort by</label>
-                    <select class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-sm text-slate-700 dark:text-slate-300 font-semibold outline-none focus:ring-2 focus:ring-orange-500/20">
-                        <option value="match">Best match</option>
-                        <option value="low">Price: Low to High</option>
-                        <option value="high">Price: High to Low</option>
-                        <option value="rating">Top Rated</option>
-                    </select>
-                </div>
-
                 <div class="pt-2">
                     <button type="button" onclick="document.querySelectorAll('#interestsContainer input').forEach(cb => cb.checked = false); document.getElementById('budgetSlider').value = 50000; document.getElementById('climateFilter').value = 'Any'; window.dispatchEvent(new Event('DOMContentLoaded'));" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 font-bold py-3 rounded-xl text-sm transition">
                         Reset filters
@@ -202,10 +210,10 @@
             <!-- Cards Grid -->
             <div class="lg:col-span-3">
                 <div class="flex justify-between items-center mb-6">
-                    <span class="text-sm font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full border border-slate-200 dark:border-slate-700" id="tripCounter">18 trips found</span>
-                    <span class="text-xs font-bold text-slate-400 uppercase tracking-widest">5 days • 2 travelers</span>
+                    <span class="text-xs md:text-sm font-bold text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700" id="tripCounter">18 trips found</span>
+                    <span class="text-[10px] md:text-xs font-bold text-slate-400 uppercase tracking-widest">5 days • 2 travelers</span>
                 </div>
-                <div id="plannerGrid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div id="plannerGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                     <!-- Javascript populates this -->
                 </div>
             </div>
@@ -216,15 +224,15 @@
     <section id="explore" class="bg-[#F8FAFC] dark:bg-slate-900 py-12 transition-colors">
         <div class="max-w-7xl mx-auto px-4 md:px-6">
             <div class="text-center max-w-2xl mx-auto mb-8">
-                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">🌍 Explore by Vibe</h2>
-                <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-sm">Apni pasand chuno — hand-picked Indian destinations grouped by vibe.</p>
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">🌍 Explore by Vibe</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-xs md:text-sm">Apni pasand chuno — hand-picked Indian destinations grouped by vibe.</p>
             </div>
             
-            <div class="flex justify-center items-center gap-2 overflow-x-auto pb-4 no-scrollbar" id="vibeTrackBar">
+            <div class="flex items-center gap-2 overflow-x-auto pb-4 no-scrollbar w-full md:justify-center" id="vibeTrackBar">
                 <!-- Javascript populates buttons here -->
             </div>
 
-            <div id="vibeCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-6">
+            <div id="vibeCardsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-4 md:mt-6">
                 <!-- Javascript populates cards here -->
             </div>
         </div>
@@ -232,79 +240,71 @@
 
     <!-- Travel Tools -->
     <section id="travel-tools" class="max-w-7xl mx-auto px-4 md:px-6 py-12">
-        <div class="text-center max-w-2xl mx-auto mb-10">
-            <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">🛠️ Travel Tools</h2>
-            <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-sm">Calculator-walculator sab andar hi hai — bahar jaane ki zaroorat nahi, guru.</p>
+        <div class="text-center max-w-2xl mx-auto mb-8 md:mb-10">
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">🛠️ Travel Tools</h2>
+            <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-xs md:text-sm">Calculator-walculator sab andar hi hai — bahar jaane ki zaroorat nahi, guru.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             <!-- Tool 1: Budget Estimator -->
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors">
+            <div class="bg-white dark:bg-slate-800 p-5 md:p-6 rounded-2xl md:rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors">
                 <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">💰 Budget Estimator</h3>
-                <p class="text-[11px] text-slate-400 font-medium mb-4">Jeb par kitna bhaari padega? Turant pata karo.</p>
+                <p class="text-[11px] text-slate-400 font-medium mb-4">Jeb par kitna bhaari padega?</p>
                 <div class="space-y-3 text-sm">
-                    <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-xs">Daily budget / person (₹)</label><input type="number" id="estDaily" value="2000" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
-                    <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-xs">Days</label><input type="number" id="estDays" value="5" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
-                    <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-xs">Travelers</label><input type="number" id="estTravelers" value="2" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
+                    <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-[10px] md:text-xs">Daily budget (₹)</label><input type="number" id="estDaily" value="2000" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-[10px] md:text-xs">Days</label><input type="number" id="estDays" value="5" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
+                        <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-[10px] md:text-xs">Travelers</label><input type="number" id="estTravelers" value="2" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
+                    </div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
-                    <span class="text-[10px] font-bold text-slate-400 uppercase">Total Trip Cost:</span>
-                    <span class="text-lg font-black text-emerald-600 dark:text-emerald-400" id="estResult">₹20,000</span>
+                    <span class="text-[10px] font-bold text-slate-400 uppercase">Total:</span>
+                    <span class="text-base md:text-lg font-black text-emerald-600 dark:text-emerald-400" id="estResult">₹20,000</span>
                 </div>
             </div>
 
             <!-- Tool 2: Cost Splitter -->
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors">
-                <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">🧮 Trip Cost Splitter</h3>
-                <p class="text-[11px] text-slate-400 font-medium mb-4">Split the total bill fairly among your group.</p>
+            <div class="bg-white dark:bg-slate-800 p-5 md:p-6 rounded-2xl md:rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors">
+                <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">🧮 Trip Splitter</h3>
+                <p class="text-[11px] text-slate-400 font-medium mb-4">Split the total bill fairly.</p>
                 <div class="space-y-3 text-sm">
-                    <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-xs">Total trip cost (₹)</label><input type="number" id="splitTotal" value="50000" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
-                    <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-xs">Number of travelers</label><input type="number" id="splitCount" value="4" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
-                    <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-xs">Extra / tip (₹)</label><input type="number" id="splitTip" value="0" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
+                    <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-[10px] md:text-xs">Total trip cost (₹)</label><input type="number" id="splitTotal" value="50000" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
+                    <div><label class="block font-bold text-slate-600 dark:text-slate-400 mb-1 text-[10px] md:text-xs">Number of travelers</label><input type="number" id="splitCount" value="4" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 font-bold text-slate-800 dark:text-white outline-none"></div>
                 </div>
                 <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-700 flex justify-between items-center">
                     <span class="text-[10px] font-bold text-slate-400 uppercase">Per Person:</span>
-                    <span class="text-lg font-black text-orange-500" id="splitResult">₹12,500</span>
+                    <span class="text-base md:text-lg font-black text-orange-500" id="splitResult">₹12,500</span>
                 </div>
             </div>
 
-            <!-- Tool 3: Packing List -->
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col justify-between transition-colors">
-                <div>
-                    <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">🎒 Packing List</h3>
-                    <p class="text-[11px] text-slate-400 font-medium mb-4">Bori bistar baandho — kuchh na bhoolo!</p>
-                    <div class="space-y-3">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Destination</label>
-                            <select class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-sm font-bold text-slate-700 dark:text-slate-200 outline-none">
-                                <option>Goa, Goa</option><option>Manali, HP</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Days</label>
-                            <input type="number" value="5" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-sm font-bold text-slate-700 dark:text-slate-200 outline-none">
-                        </div>
-                    </div>
-                </div>
-                <button class="w-full bg-orange-500 text-white font-bold py-2.5 rounded-xl text-sm mt-4 hover:bg-orange-600">
-                    Generate list
-                </button>
-            </div>
-
-            <!-- Tool 4: Countdown -->
-            <div class="bg-white dark:bg-slate-800 p-6 rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors">
+            <!-- Tool 3: Countdown -->
+            <div class="bg-white dark:bg-slate-800 p-5 md:p-6 rounded-2xl md:rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors">
                 <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">⏳ Trip Countdown</h3>
-                <p class="text-[11px] text-slate-400 font-medium mb-4">Excitement chalu — nikalne me kitne din bache?</p>
+                <p class="text-[11px] text-slate-400 font-medium mb-4">Excitement chalu — kitne din bache?</p>
                 <div>
                     <label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Departure date</label>
                     <input type="date" id="countdownDateInput" value="2026-07-25" class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-sm font-bold text-slate-700 dark:text-slate-200 outline-none">
                 </div>
-                <div class="flex justify-between text-center mt-6 px-2">
-                    <div><p class="text-2xl font-black text-orange-500" id="cdDays">29</p><p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Days</p></div>
-                    <div><p class="text-2xl font-black text-orange-500" id="cdHrs">12</p><p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Hrs</p></div>
-                    <div><p class="text-2xl font-black text-orange-500" id="cdMin">07</p><p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Min</p></div>
-                    <div><p class="text-2xl font-black text-orange-500" id="cdSec">12</p><p class="text-[10px] uppercase font-bold text-slate-400 mt-1">Sec</p></div>
+                <div class="flex justify-between text-center mt-6 px-1 md:px-2">
+                    <div><p class="text-xl md:text-2xl font-black text-orange-500" id="cdDays">29</p><p class="text-[9px] md:text-[10px] uppercase font-bold text-slate-400 mt-1">Days</p></div>
+                    <div><p class="text-xl md:text-2xl font-black text-orange-500" id="cdHrs">12</p><p class="text-[9px] md:text-[10px] uppercase font-bold text-slate-400 mt-1">Hrs</p></div>
+                    <div><p class="text-xl md:text-2xl font-black text-orange-500" id="cdMin">07</p><p class="text-[9px] md:text-[10px] uppercase font-bold text-slate-400 mt-1">Min</p></div>
+                    <div><p class="text-xl md:text-2xl font-black text-orange-500" id="cdSec">12</p><p class="text-[9px] md:text-[10px] uppercase font-bold text-slate-400 mt-1">Sec</p></div>
                 </div>
+            </div>
+
+            <!-- Tool 4: Packing List -->
+            <div class="bg-white dark:bg-slate-800 p-5 md:p-6 rounded-2xl md:rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm flex flex-col justify-between transition-colors">
+                <div>
+                    <h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2 mb-2">🎒 Packing List</h3>
+                    <p class="text-[11px] text-slate-400 font-medium mb-4">Bori bistar baandho — kuchh na bhoolo!</p>
+                    <select class="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-sm font-bold text-slate-700 dark:text-slate-200 outline-none mb-3">
+                        <option>Goa, Goa</option><option>Manali, HP</option>
+                    </select>
+                </div>
+                <button class="w-full bg-orange-500 text-white font-bold py-2.5 rounded-xl text-sm mt-4 hover:bg-orange-600">
+                    Generate list
+                </button>
             </div>
         </div>
     </section>
@@ -312,15 +312,16 @@
     <!-- Reviews -->
     <section id="reviews" class="py-12">
         <div class="max-w-7xl mx-auto px-4 md:px-6">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">⭐️ Loved by Travelers</h2>
-                <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-sm">Log kya bole, khud padh lo — apan jhooth nahi bolte, guru!</p>
+            <div class="text-center max-w-2xl mx-auto mb-8 md:mb-10">
+                <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">⭐️ Loved by Travelers</h2>
+                <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-xs md:text-sm">Log kya bole, khud padh lo — apan jhooth nahi bolte, guru!</p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors"><p class="text-orange-400 text-xs mb-3">★★★★★</p><p class="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed mb-6">"The day-by-day plan was spot on. We barely had to think — just showed up and enjoyed. Best trip ever!"</p><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-[#008080] flex items-center justify-center text-white text-[10px] font-bold">AS</div><div><p class="text-xs font-bold text-slate-800 dark:text-white">Aarav Sharma</p><p class="text-[10px] text-slate-400 font-semibold">Goa, 5 days</p></div></div></div>
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors"><p class="text-orange-400 text-xs mb-3">★★★★★</p><p class="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed mb-6">"Loved the budget estimator and packing list. The premium camp upgrade was worth every rupee!"</p><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold">LI</div><div><p class="text-xs font-bold text-slate-800 dark:text-white">Lena Iyer</p><p class="text-[10px] text-slate-400 font-semibold">Leh-Ladakh, 7 days</p></div></div></div>
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors"><p class="text-orange-400 text-xs mb-3">★★★★★</p><p class="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed mb-6">"The private houseboat was magical. MereYatriTravels understood exactly what we wanted."</p><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-[#008080] flex items-center justify-center text-white text-[10px] font-bold">PN</div><div><p class="text-xs font-bold text-slate-800 dark:text-white">Priya Nair</p><p class="text-[10px] text-slate-400 font-semibold">Kerala, 5 days</p></div></div></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+                <!-- Review Cards (Responsive padding) -->
+                <div class="bg-white dark:bg-slate-800 p-5 md:p-6 rounded-2xl md:rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors"><p class="text-orange-400 text-xs mb-3">★★★★★</p><p class="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed mb-6">"The day-by-day plan was spot on. We barely had to think — just showed up and enjoyed. Best trip ever!"</p><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-[#008080] flex items-center justify-center text-white text-[10px] font-bold">AS</div><div><p class="text-xs font-bold text-slate-800 dark:text-white">Aarav Sharma</p><p class="text-[10px] text-slate-400 font-semibold">Goa, 5 days</p></div></div></div>
+                <div class="bg-white dark:bg-slate-800 p-5 md:p-6 rounded-2xl md:rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors"><p class="text-orange-400 text-xs mb-3">★★★★★</p><p class="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed mb-6">"Loved the budget estimator and packing list. The premium camp upgrade was worth every rupee!"</p><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white text-[10px] font-bold">LI</div><div><p class="text-xs font-bold text-slate-800 dark:text-white">Lena Iyer</p><p class="text-[10px] text-slate-400 font-semibold">Leh-Ladakh, 7 days</p></div></div></div>
+                <div class="bg-white dark:bg-slate-800 p-5 md:p-6 rounded-2xl md:rounded-[24px] border border-slate-100 dark:border-slate-700 shadow-sm transition-colors"><p class="text-orange-400 text-xs mb-3">★★★★★</p><p class="text-sm font-medium text-slate-600 dark:text-slate-300 leading-relaxed mb-6">"The private houseboat was magical. MereYatriTravels understood exactly what we wanted."</p><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-[#008080] flex items-center justify-center text-white text-[10px] font-bold">PN</div><div><p class="text-xs font-bold text-slate-800 dark:text-white">Priya Nair</p><p class="text-[10px] text-slate-400 font-semibold">Kerala, 5 days</p></div></div></div>
             </div>
         </div>
     </section>
@@ -328,31 +329,31 @@
     <!-- FAQ -->
     <section id="faq" class="max-w-3xl mx-auto px-4 py-12">
         <div class="text-center mb-8">
-            <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">❓ Sawaal-Jawaab (FAQ)</h2>
-            <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-sm">Mann me kuchh chal raha hai? Yahan dekho — shayad jawaab mil jaye!</p>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">❓ Sawaal-Jawaab (FAQ)</h2>
+            <p class="text-slate-500 dark:text-slate-400 mt-2 font-medium text-xs md:text-sm">Mann me kuchh chal raha hai? Yahan dekho — shayad jawaab mil jaye!</p>
         </div>
         <div class="space-y-3" id="faqAccordionContainer"></div>
     </section>
 
-    <!-- Contact Horizontal Card -->
-    <section id="contact" class="max-w-5xl mx-auto px-4 py-12">
-        <div class="bg-white dark:bg-slate-800 p-8 rounded-[24px] border border-slate-200 dark:border-slate-700 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8 items-center transition-colors">
+    <!-- Contact Form -->
+    <section id="contact" class="max-w-5xl mx-auto px-4 py-12 w-full">
+        <div class="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-[24px] border border-slate-200 dark:border-slate-700 shadow-sm grid grid-cols-1 md:grid-cols-2 gap-8 items-center transition-colors">
             <div>
-                <h3 class="text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2">📠 Plan with a human</h3>
-                <p class="text-slate-500 dark:text-slate-400 text-sm font-medium leading-relaxed mb-6">Insaan se baat karni hai? Apni pasand bhejo, MereYatriTravels ka expert 24 ghante me poori custom itinerary bana dega.</p>
-                <div class="space-y-3 text-sm font-bold text-slate-700 dark:text-slate-300">
-                    <p class="flex items-center gap-2"><span class="text-green-500">✅</span> Bilkul free quote — koi tension nahi</p>
-                    <p class="flex items-center gap-2"><span class="text-green-500">✅</span> Flexible cancellation — mann badle to koi baat nahi</p>
-                    <p class="flex items-center gap-2"><span class="text-green-500">✅</span> 24/7 trip support — hum hamesha hai</p>
+                <h3 class="text-xl md:text-2xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-2">📠 Plan with a human</h3>
+                <p class="text-slate-500 dark:text-slate-400 text-xs md:text-sm font-medium leading-relaxed mb-6">Insaan se baat karni hai? Apni pasand bhejo, MereYatriTravels ka expert 24 ghante me poori custom itinerary bana dega.</p>
+                <div class="space-y-3 text-xs md:text-sm font-bold text-slate-700 dark:text-slate-300">
+                    <p class="flex items-start gap-2"><span class="text-green-500 shrink-0">✅</span> Bilkul free quote — koi tension nahi</p>
+                    <p class="flex items-start gap-2"><span class="text-green-500 shrink-0">✅</span> Flexible cancellation — mann badle to koi baat nahi</p>
+                    <p class="flex items-start gap-2"><span class="text-green-500 shrink-0">✅</span> 24/7 trip support — hum hamesha hai</p>
                 </div>
             </div>
             
-            <form id="contactInquiryForm" class="bg-slate-50 dark:bg-slate-900 p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm space-y-4">
-                <div class="grid grid-cols-2 gap-4">
+            <form id="contactInquiryForm" class="bg-slate-50 dark:bg-slate-900 p-5 md:p-6 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div><label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Name</label><input type="text" placeholder="Your name" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl p-2.5 text-sm dark:text-white outline-none focus:border-orange-500"></div>
                     <div><label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Email</label><input type="email" placeholder="you@email.com" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl p-2.5 text-sm dark:text-white outline-none focus:border-orange-500"></div>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div><label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Destination</label><input type="text" placeholder="Where to?" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl p-2.5 text-sm dark:text-white outline-none focus:border-orange-500"></div>
                     <div><label class="block text-xs font-bold text-slate-600 dark:text-slate-400 mb-1">Travel date</label><input type="date" class="w-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-600 rounded-xl p-2.5 text-sm dark:text-white outline-none focus:border-orange-500 text-slate-500"></div>
                 </div>
@@ -363,38 +364,36 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-[#F8FAFC] dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-16 mt-10 transition-colors">
-        <div class="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-1 md:grid-cols-4 gap-10">
-            <!-- Brand Column -->
-            <div class="md:col-span-1">
-                <span class="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2 mb-4">
+    <footer class="bg-[#F8FAFC] dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-12 md:py-16 mt-10 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 md:gap-10">
+            <div class="sm:col-span-2 md:col-span-1">
+                <span class="text-lg md:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2 mb-4">
                     🧭 MereYatri<span class="text-orange-500">Travels</span>
                 </span>
-                <p class="text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed pr-4">
+                <p class="text-[11px] md:text-xs text-slate-500 dark:text-slate-400 font-medium leading-relaxed pr-4">
                     Smart, personalized India travel planning. Bharose ke saath, dil se banaya. ❤️
                 </p>
             </div>
             
-            <!-- Links Columns -->
             <div>
-                <h4 class="font-bold text-slate-900 dark:text-white mb-4 text-sm">Company</h4>
-                <ul class="space-y-3 text-sm text-slate-500 dark:text-slate-400 font-medium">
+                <h4 class="font-bold text-slate-900 dark:text-white mb-3 md:mb-4 text-sm">Company</h4>
+                <ul class="space-y-2.5 text-[13px] md:text-sm text-slate-500 dark:text-slate-400 font-medium">
                     <li><a href="#explore" class="hover:text-orange-500 transition">Destinations</a></li>
                     <li><a href="#reviews" class="hover:text-orange-500 transition">Reviews</a></li>
                     <li><a href="#contact" class="hover:text-orange-500 transition">Contact</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="font-bold text-slate-900 dark:text-white mb-4 text-sm">Tools</h4>
-                <ul class="space-y-3 text-sm text-slate-500 dark:text-slate-400 font-medium">
+                <h4 class="font-bold text-slate-900 dark:text-white mb-3 md:mb-4 text-sm">Tools</h4>
+                <ul class="space-y-2.5 text-[13px] md:text-sm text-slate-500 dark:text-slate-400 font-medium">
                     <li><a href="#travel-tools" class="hover:text-orange-500 transition">Budget Estimator</a></li>
                     <li><a href="#travel-tools" class="hover:text-orange-500 transition">Cost Splitter</a></li>
                     <li><a href="#travel-tools" class="hover:text-orange-500 transition">Packing List</a></li>
                 </ul>
             </div>
             <div>
-                <h4 class="font-bold text-slate-900 dark:text-white mb-4 text-sm">Follow</h4>
-                <ul class="space-y-3 text-sm text-slate-500 dark:text-slate-400 font-medium">
+                <h4 class="font-bold text-slate-900 dark:text-white mb-3 md:mb-4 text-sm">Follow</h4>
+                <ul class="space-y-2.5 text-[13px] md:text-sm text-slate-500 dark:text-slate-400 font-medium">
                     <li><a href="#" class="hover:text-orange-500 transition">Instagram</a></li>
                     <li><a href="#" class="hover:text-orange-500 transition">YouTube</a></li>
                     <li><a href="#" class="hover:text-orange-500 transition">Newsletter</a></li>
@@ -403,12 +402,9 @@
         </div>
     </footer>
 
-    <!-- Floating Chatbot & WhatsApp Widget (Bottom Right) -->
-    <div class="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-        
-        <!-- Chatbot Popup (Hidden by default) -->
-        <div id="chatbotPopup" class="hidden mb-4 w-72 md:w-80 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-300 origin-bottom-right">
-            <!-- Header -->
+    <!-- Floating Chatbot & WhatsApp Widget -->
+    <div class="fixed bottom-4 md:bottom-6 right-4 md:right-6 z-50 flex flex-col items-end">
+        <div id="chatbotPopup" class="hidden mb-4 w-[calc(100vw-2rem)] max-w-[320px] bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden transition-all duration-300 origin-bottom-right">
             <div class="bg-slate-900 dark:bg-slate-950 p-4 flex justify-between items-center text-white">
                 <div class="flex items-center gap-3">
                     <span class="text-2xl">🤖</span>
@@ -419,8 +415,6 @@
                 </div>
                 <button id="closeChatBtn" class="text-slate-400 hover:text-white transition text-xl">&times;</button>
             </div>
-            
-            <!-- Chat Area -->
             <div class="p-4 bg-slate-50 dark:bg-slate-900/50 h-32 overflow-y-auto flex flex-col gap-2">
                 <div class="bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 text-xs p-3 rounded-xl rounded-tl-none shadow-sm inline-block max-w-[85%] border border-slate-100 dark:border-slate-600 font-medium leading-relaxed">
                     Namaste! 🙏 Welcome to MereYatriTravels.
@@ -429,10 +423,7 @@
                     Ready to plan your dream trip? Connect with our expert directly below! 👇
                 </div>
             </div>
-            
-            <!-- Action / Input Area -->
             <div class="p-4 bg-white dark:bg-slate-800 border-t border-slate-100 dark:border-slate-700">
-                <!-- Manager WhatsApp Number Integrated Here -->
                 <a href="https://wa.me/917388612617?text=Namaste%20MereYatriTravels%20!!%0AI%20want%20to%20plan%20a%20trip%2C%20can%20we%20connect%20.." target="_blank" class="w-full bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-md active:scale-95">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
                     Continue on WhatsApp
@@ -440,24 +431,21 @@
             </div>
         </div>
         
-        <!-- Toggle Chat Button -->
-        <button id="chatbotToggleBtn" class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 rounded-full p-4 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition transform hover:scale-105 hover:-translate-y-1 flex items-center justify-center relative">
-            <!-- Notification Dot -->
+        <button id="chatbotToggleBtn" class="bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-slate-800 dark:hover:bg-slate-100 rounded-full p-3.5 md:p-4 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition transform hover:scale-105 hover:-translate-y-1 flex items-center justify-center relative">
             <span class="absolute top-0 right-0 flex h-3 w-3">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
               <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500 border-2 border-slate-900"></span>
             </span>
-            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
+            <svg class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path></svg>
         </button>
     </div>
 
+    <!-- Scripts -->
     <script src="js/main.js"></script>
 
     <!-- Theme Toggle Script -->
     <script>
         const themeBtn = document.getElementById('themeToggle');
-        
-        // Check local storage OR system preferences on load
         if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             document.documentElement.classList.add('dark');
             themeBtn.textContent = '☀️';
@@ -465,8 +453,6 @@
             document.documentElement.classList.remove('dark');
             themeBtn.textContent = '🌙';
         }
-
-        // Toggle logic
         themeBtn.addEventListener('click', () => {
             document.documentElement.classList.toggle('dark');
             if (document.documentElement.classList.contains('dark')) {
@@ -476,6 +462,24 @@
                 localStorage.theme = 'light';
                 themeBtn.textContent = '🌙';
             }
+        });
+    </script>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hide menu when clicking a link inside it
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
         });
     </script>
 
@@ -489,7 +493,6 @@
             const toggleChat = () => {
                 if (chatbotPopup.classList.contains('hidden')) {
                     chatbotPopup.classList.remove('hidden');
-                    // Add small delay for animation effect
                     setTimeout(() => {
                         chatbotPopup.classList.remove('scale-95', 'opacity-0');
                         chatbotPopup.classList.add('scale-100', 'opacity-100');
@@ -497,16 +500,13 @@
                 } else {
                     chatbotPopup.classList.remove('scale-100', 'opacity-100');
                     chatbotPopup.classList.add('scale-95', 'opacity-0');
-                    // Wait for animation to finish before hiding
                     setTimeout(() => {
                         chatbotPopup.classList.add('hidden');
                     }, 300);
                 }
             };
 
-            // Set initial state for animations
             chatbotPopup.classList.add('scale-95', 'opacity-0');
-
             chatbotToggleBtn.addEventListener('click', toggleChat);
             closeChatBtn.addEventListener('click', toggleChat);
         });
